@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -15,7 +17,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth:api', ['except' => ['login']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
     }
 
     /**
@@ -33,6 +35,27 @@ class AuthController extends Controller
 
         return $this->respondWithToken($token);
     }
+
+
+    public function signup(Request $request)
+    {
+        $fields = $request->validate([
+            'name' => 'required|string',
+            'username' => 'required|string|unique:users,username',
+            'email' => 'required|email|string|unique:users,email|max:255',
+            'password' => 'required|min:6|string|confirmed',
+        ]);
+
+        $user = User::create([
+            'name' => $fields['name'],
+            'username' => $fields['username'],
+            'email' => $fields['email'],
+            'password' => bcrypt($fields['password'])
+        ]);
+
+        return $this->login($request);
+    }
+
 
     /**
      * Get the authenticated User.
