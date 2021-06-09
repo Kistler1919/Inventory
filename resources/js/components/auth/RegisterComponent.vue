@@ -42,7 +42,7 @@
                   <hr>
                   <div class="text-center">
                     <!-- <a class="font-weight-bold small" href="login.html">Already have an account?</a> -->
-                    <router-link clrouter-linkss="font-weight-bold small" to="login">Already have an account? Login!</router-link>
+                    <router-link class="font-weight-bold small" to="login">Already have an account? Login!</router-link>
                   </div>
                   <div class="text-center">
                   </div>

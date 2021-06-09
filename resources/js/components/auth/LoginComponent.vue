@@ -10,13 +10,26 @@
                   <div class="text-center">
                     <h1 class="h4 text-gray-700 mb-4">Login Form</h1>
                   </div>
-                  <form class="user">
+                  <form class="user" @submit.prevent="login">
                     <div class="form-group">
-                      <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp"
-                        placeholder="Email Address">
+                      <input type="email" 
+                        class="form-control" 
+                        name="email" 
+                        id="email" 
+                        aria-describedby="emailHelp"
+                        placeholder="Email Address"
+                        v-model="form.email"
+                      >
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                      <input 
+                        type="password" 
+                        class="form-control" 
+                        name="password" 
+                        id="password" 
+                        placeholder="Password"
+                        v-model="form.password"
+                      >
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
@@ -26,7 +39,7 @@
                       </div>
                     </div>
                     <div class="form-group">
-                      <a href="#" class="btn btn-primary btn-block">Login</a>
+                      <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
                     <hr>
                     <a href="#" class="btn btn-google btn-block">
@@ -38,10 +51,10 @@
                   </form>
                   <hr>
                   <div class="text-center">
-                    <router-link clrouter-linkss="font-weight-bold small" to="register">Create an Account!</router-link>
+                    <router-link class="font-weight-bold small" to="register">Create an Account!</router-link>
                   </div>
                   <div class="text-center">
-                    <router-link clrouter-linkss="font-weight-bold small" to="forgot-password">Forgot your password?</router-link>
+                    <router-link class="font-weight-bold small" to="forgot-password">Forgot your password?</router-link>
                   </div>
                   <div class="text-center">
                   </div>
@@ -56,9 +69,25 @@
 </template>
 
 <script type="text/javascript">
-export default {
 
-}
+  export default {
+    data(){
+      return {
+        form: {
+          email: null,
+          password: null,
+        }
+      }
+    },
+    methods: {
+      login(){
+        axios.post('api/v1/auth/login', this.form)
+          .then(res => User.responseAfterLogin(res))
+          .catch(err => console.log(err))
+      }
+    }
+  }
+
 </script>
 
 <style type="text/css">
