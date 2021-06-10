@@ -20,6 +20,7 @@
                         placeholder="Email Address"
                         v-model="form.email"
                       >
+                      <small class="text-danger" v-if="errors.email">{{ errors.email[0] }}</small>
                     </div>
                     <div class="form-group">
                       <input 
@@ -30,6 +31,7 @@
                         placeholder="Password"
                         v-model="form.password"
                       >
+                      <small class="text-danger" v-if="errors.password">{{ errors.password[0] }}</small>
                     </div>
                     <div class="form-group">
                       <div class="custom-control custom-checkbox small" style="line-height: 1.5rem;">
@@ -41,13 +43,13 @@
                     <div class="form-group">
                       <button type="submit" class="btn btn-primary btn-block">Login</button>
                     </div>
-                    <hr>
+                    <!-- <hr>
                     <a href="#" class="btn btn-google btn-block">
                       <i class="fab fa-google fa-fw"></i> Login with Google
                     </a>
                     <a href="#" class="btn btn-facebook btn-block">
                       <i class="fab fa-facebook-f fa-fw"></i> Login with Facebook
-                    </a>
+                    </a> -->
                   </form>
                   <hr>
                   <div class="text-center">
@@ -71,19 +73,38 @@
 <script type="text/javascript">
 
   export default {
+    created(){
+      if (User.loggedIn()) {
+        this.$router.push({ name: 'home'})
+      }
+    },
     data(){
       return {
         form: {
           email: null,
           password: null,
-        }
+        },
+        errors: {}
       }
     },
     methods: {
       login(){
         axios.post('api/v1/auth/login', this.form)
-          .then(res => User.responseAfterLogin(res))
-          .catch(err => console.log(err))
+          .then(res => {
+            User.responseAfterLogin(res)
+            Toast.fire({
+              icon: 'success',
+              title: 'Signed in successfully'
+            })
+            this.$router.push({ name: 'home'})
+          })
+          .catch(error => this.errors = error.response.data.errors)
+          .catch(
+            Toast.fire({
+              icon: 'warning',
+              title: 'Invalid credentials'
+            })
+          )
       }
     }
   }

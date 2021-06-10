@@ -2,9 +2,9 @@ class Token {
     isValid(token) {
         const payload = this.payload(token)
         if (payload) {
-            return (payload.iss =
+            return payload.iss =
                 "http://inventory.test/api/v1/auth/login" ||
-                "http://inventory.test/api/v1/auth/register" ? true : false )
+                "http://inventory.test/api/v1/auth/register" ? true : false
         }
         return false
     }
