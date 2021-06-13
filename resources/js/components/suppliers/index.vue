@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <router-link to="add-employee" class="btn btn-primary">Add New Employee</router-link>
+      <router-link to="/add-supplier" class="btn btn-primary">Add New Supplier</router-link>
     </div>
         <div class="row justify-content-center">
       <div class="col-xl-12 col-lg-10 col-md-8">
@@ -11,7 +11,7 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-700 mb-4">List of all Employees</h1>
+                    <h1 class="h4 text-gray-700 mb-4">List of all Suppliers</h1>
                   </div>
                   <hr>
                   <div class="container-fluid" id="container-wrapper">
@@ -49,22 +49,22 @@
                         <th>Name</th>
                         <th>Photo</th>
                         <th>E-mail</th>
-                        <th>Start date</th>
-                        <th>Salary</th>
+                        <th>Phone</th>
+                        <th>Country</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="employee in filterSearchTerm" :key="employee.id">
-                        <td>{{ employee.name }}</td>
-                        <td><img :src="employee.photo" id="profile"/></td>
-                        <td>{{ employee.email }}</td>
-                        <td>{{ employee.date_joined }}</td>
-                        <td>$ {{ employee.salary }}</td>
+                      <tr v-for="supplier in filterSearchTerm" :key="supplier.id">
+                        <td>{{ supplier.name }}</td>
+                        <td><img :src="supplier.logo" id="profile"/></td>
+                        <td>{{ supplier.email }}</td>
+                        <td>{{ supplier.phone }}</td>
+                        <td>{{ supplier.country }}</td>
                         <td>
                           <div >
-                            <router-link :to="{ name: 'edit-employee', params:{ id: employee.id } }" class="btn btn-sm btn-primary"><i class="fas fa-edit text-gray-100"></i></router-link>
-                            <a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash text-gray-100"></i></a>
+                            <router-link :to="{ name: 'edit-supplier', params:{ id: supplier.id } }" class="btn btn-sm btn-primary"><i class="fas fa-edit text-gray-100"></i></router-link>
+                            <a @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash text-gray-100"></i></a>
                           </div>
                         </td>
                         
@@ -97,25 +97,25 @@ export default {
   },
   data() {
     return {
-      employees: [],
+      suppliers: [],
       searchTerm: '',
     }
   },
 
   computed: {
     filterSearchTerm(){
-      return this.employees.filter(employee => {
-        return employee.name.match(this.searchTerm)
+      return this.suppliers.filter(supplier => {
+        return supplier.name.match(this.searchTerm)
       })
     }
   },
   methods: {
-    getEmployees() {
-      axios.get('api/v1/employees')
-        .then(({data}) => (this.employees = data))
+    getSuppliers() {
+      axios.get('/api/v1/suppliers/')
+        .then(({data}) => (this.suppliers = data))
         .catch(error => this.errors = error.response.data.errors)
     },
-    deleteEmployee(id) {
+    deleteSupplier(id) {
       Swal.fire({
         title: 'Are you sure?',
         text: "This action is irreversible!",
@@ -126,14 +126,14 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('api/v1/employees/'+id)
+          axios.delete('/api/v1/suppliers/'+id)
             .then(() => {
-              this.employees = this.employees.filter(employee => {
-                return employee.id != id
+              this.suppliers = this.suppliers.filter(supplier => {
+                return supplier.id != id
               })
             })
             .catch(() => {
-              this.$router.push({ name: 'employees'})
+              this.$router.push({ name: 'suppliers'})
             })
           Swal.fire(
             'Deleted!',
@@ -145,7 +145,7 @@ export default {
     }
   },
   created() {
-    this.getEmployees();
+    this.getSuppliers();
   }
 }
 </script>
