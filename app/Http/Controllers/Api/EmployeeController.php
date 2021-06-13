@@ -30,8 +30,8 @@ class EmployeeController extends Controller
     {
         $fields = $request->validate([
             'name' => 'required|string',
-            'username' => 'required|string|unique:users,username',
-            'email' => 'required|email|string|unique:users,email|max:255',
+            'username' => 'required|string|unique:employees,username',
+            'email' => 'required|email|string|unique:employees,email|max:255',
             'address' => 'required|string',
             'phone' => 'required|string',
             'salary' => 'required|string',
