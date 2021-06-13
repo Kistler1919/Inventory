@@ -55,7 +55,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="employee in filterSearchTerm" :key="employee.email">
+                      <tr v-for="employee in filterSearchTerm" :key="employee.id">
                         <td>{{ employee.name }}</td>
                         <td><img :src="employee.photo" id="profile"/></td>
                         <td>{{ employee.email }}</td>
@@ -63,8 +63,8 @@
                         <td>$ {{ employee.salary }}</td>
                         <td>
                           <div >
-                            <a href="#" class="btn btn-sm btn-primary"><i class="fas fa-edit text-gray-100"></i></a>
-                            <a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash text-gray-100"></i></a>
+                            <router-link :to="{ name: 'edit-employee', params:{ id: employee.id } }" class="btn btn-sm btn-primary"><i class="fas fa-edit text-gray-100"></i></router-link>
+                            <a @click="deleteEmployee(employee.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash text-gray-100"></i></a>
                           </div>
                         </td>
                         
@@ -114,6 +114,34 @@ export default {
       axios.get('api/v1/employees')
         .then(({data}) => (this.employees = data))
         .catch(error => this.errors = error.response.data.errors)
+    },
+    deleteEmployee(id) {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "This action is irreversible!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios.delete('api/v1/employees/'+id)
+            .then(() => {
+              this.employees = this.employees.filter(employee => {
+                return employee.id != id
+              })
+            })
+            .catch(() => {
+              this.$router.push({ name: 'employees'})
+            })
+          Swal.fire(
+            'Deleted!',
+            'Employee record has been deleted.',
+            'success'
+          )
+        }
+      })
     }
   },
   created() {

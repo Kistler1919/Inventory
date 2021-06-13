@@ -88,18 +88,9 @@ class EmployeeController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        $employee = Employee::where('id', $id)->first();
+        // dd($employee);
+        return response()->json($employee);
     }
 
     /**
@@ -111,7 +102,47 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = array();
+        $data['name'] = $request->name;
+        $data['username'] = $request->username;
+        $data['email'] = $request->email;
+        $data['address'] = $request->address;
+        $data['phone'] = $request->phone;
+        $data['salary'] = $request->salary;
+        $data['date_joined'] = $request->date_joined;
+        $data['nid'] = $request->nid;
+        $data['name'] = $request->name;
+
+        $image = $request->new_profile;
+
+        if ($image) {
+            $position = strpos($image, ';');
+            $sub = substr($image, 0, $position);
+            $exist = explode('/', $sub)[1];
+
+
+            $name = time().".".$exist;
+            $image = Image::make($image)->resize(240, 200);
+            $upload_path = 'backend/employees/gallery/';
+            $image_url = $upload_path.$name;
+
+            $success = $image->save($image_url);
+
+            if ($success) {
+                $data['photo'] = $image_url;
+                $img = Employee::where('id', $id)->first();
+                $image_path = $img->photo;
+                unlink($image_path);
+                $employee = Employee::where('id', $id)->update($data);
+            }
+            return $employee;
+            
+        } else {
+            $oldProfile = $request->photo;
+            $data['photo'] = $oldProfile;
+            $employee = Employee::where('id', $id)->update($data);
+            return $employee;
+        }
     }
 
     /**
@@ -122,6 +153,13 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $employee = Employee::where('id', $id)->first();
+        $photo = $employee->photo;
+        if ($photo) {
+            unlink($photo);
+            Employee::where('id', $id)->delete();
+        } else {
+            Employee::where('id', $id)->delete();
+        }
     }
 }

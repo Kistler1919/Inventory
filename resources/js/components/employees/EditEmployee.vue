@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <router-link to="employees" class="btn btn-primary"> List all employees</router-link>
+      <router-link to="/employees" class="btn btn-primary"> List all employees</router-link>
     </div>
     <div class="row justify-content-center">
       <div class="col-xl-10 col-lg-12 col-md-8">
@@ -11,9 +11,9 @@
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-700 mb-4">Add New Employee</h1>
+                    <h1 class="h4 text-gray-700 mb-4">Edit/Update Employee Details</h1>
                   </div>
-                  <form class="user" @submit.prevent="addEmployee" enctype="multipart/form-data">
+                  <form class="user" @submit.prevent="updateEmployee" enctype="multipart/form-data">
                     <div class="form-group">
                       <div class="form-row">
                         <div class="col-md-6">
@@ -159,7 +159,7 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 export default {
   created() {
     if (!User.loggedIn()) {
@@ -169,18 +169,25 @@ export default {
   data() {
     return {
       form: {
-        name: null,
-        username: null,
-        email: null,
-        address: null,
-        phone: null,
-        salary: null,
-        date_joined: null,
-        nid: null,
-        photo: null,
+        name: '',
+        username: '',
+        email: '',
+        address: '',
+        phone: '',
+        salary: '',
+        date_joined: '',
+        nid: '',
+        photo: '',
+        new_profile: '',
       },
       errors: {},
     }
+  },
+  created() {
+    let id = this.$route.params.id
+  	axios.get('/api/v1/employees/'+id)
+      .then(({data}) => (this.form = data))
+      .catch(console.log('error'))
   },
   methods: {
     onFileSelected(event) {
@@ -190,13 +197,14 @@ export default {
       } else {
         let reader = new FileReader()
         reader.onload = event => {
-          this.form.photo = event.target.result
+          this.form.new_profile = event.target.result
         };
         reader.readAsDataURL(file);
       }
     },
-    addEmployee() {
-      axios.post('api/v1/employees', this.form)
+    updateEmployee() {
+      let id = this.$route.params.id
+      axios.patch('/api/v1/employees/'+id, this.form)
         .then(() => {
           this.$router.push({ name: 'employees'})
           Notification.success()
@@ -207,5 +215,6 @@ export default {
 }
 </script>
 
-<style type="text/css">
+<style>
+
 </style>
