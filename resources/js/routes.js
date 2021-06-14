@@ -12,6 +12,9 @@ let EditEmployee = require('./components/employees/EditEmployee.vue').default;
 let Suppliers = require('./components/suppliers/index.vue').default;
 let AddSupplier = require('./components/suppliers/AddSupplier.vue').default;
 let EditSupplier = require('./components/suppliers/EditSupplier.vue').default;
+let Categories = require('./components/category/index.vue').default;
+let AddCategory = require('./components/category/AddCategory.vue').default;
+let EditCategory = require('./components/category/EditCategory.vue').default;
 
 export const routes = [
   { path: '/', component: HomeComponent, name: 'home'},
@@ -29,4 +32,9 @@ export const routes = [
   { path: '/suppliers', component: Suppliers, name: 'suppliers'},
   { path: '/add-supplier', component: AddSupplier, name: 'add-supplier'},
   { path: '/edit-supplier/:id', component: EditSupplier, name: 'edit-supplier'},
+
+  // Category CRUD routes
+  { path: '/categories', component: Categories, name: 'categories'},
+  { path: '/add-category', component: AddCategory, name: 'add-category'},
+  { path: '/edit-category/:id', component: EditCategory, name: 'edit-category'},
 ]

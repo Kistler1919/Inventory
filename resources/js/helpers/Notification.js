@@ -3,7 +3,7 @@ class Notification {
     new Noty({
       type: 'success',
       layout: 'topRight',
-      text: 'Bingo!',
+      text: 'Submitted Successfully!',
       timeout: 1000
     }).show();
   }
@@ -19,7 +19,7 @@ class Notification {
     new Noty({
       type: 'alert',
       layout: 'topRight',
-      text: 'Something went wrong.',
+      text: 'Oopsie! Something went wrong.',
       timeout: 1000
     }).show();
   }

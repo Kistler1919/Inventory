@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\EmployeeController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -28,3 +29,4 @@ Route::group([
 
 Route::apiResource('v1/employees', EmployeeController::class);
 Route::apiResource('v1/suppliers', SupplierController::class);
+Route::apiResource('v1/categories', CategoryController::class);

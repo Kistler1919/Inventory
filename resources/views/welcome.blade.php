@@ -64,12 +64,25 @@
                     </a>
                     <div id="collapseBootstrap1" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <router-link class="collapse-item" to="/add-supplier">Add New Suppliers</router-link>
+                        <router-link class="collapse-item" to="/add-supplier">Add New Supplier</router-link>
                         <router-link class="collapse-item" to="/suppliers">List All Suppliers</router-link>
                         {{-- <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
                         <a class="collapse-item" href="modals.html">Modals</a>
                         <a class="collapse-item" href="popovers.html">Popovers</a>
                         <a class="collapse-item" href="progress-bar.html">Progress Bars</a> --}}
+                    </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#categorie"
+                    aria-expanded="true" aria-controls="categorie">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Category</span>
+                    </a>
+                    <div id="categorie" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <router-link class="collapse-item" to="/add-category">Add New Category</router-link>
+                        <router-link class="collapse-item" to="/categories">List All Categories</router-link>
                     </div>
                     </div>
                 </li>

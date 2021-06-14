@@ -1,17 +1,17 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <router-link to="/add-supplier" class="btn btn-primary">Add New Supplier</router-link>
+      <router-link to="/add-category" class="btn btn-primary">Add New Category</router-link>
     </div>
         <div class="row justify-content-center">
-      <div class="col-xl-12 col-lg-10 col-md-8">
+      <div class="col-xl-8 col-lg-8 col-md-4">
         <div class="card shadow-lg my-5">
           <div class="card-body p-0">
             <div class="row">
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-700 mb-4">List of all Suppliers</h1>
+                    <h1 class="h4 text-gray-700 mb-4">List of all Categories</h1>
                   </div>
                   <hr>
                   <div class="container-fluid" id="container-wrapper">
@@ -38,25 +38,17 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>Name</th>
-                        <th>Photo</th>
-                        <th>E-mail</th>
-                        <th>Phone</th>
-                        <th>Country</th>
+                        <th>Category Name</th>
                         <th>Actions</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="supplier in filterSearchTerm" :key="supplier.id">
-                        <td>{{ supplier.name }}</td>
-                        <td><img :src="supplier.logo" id="profile"/></td>
-                        <td>{{ supplier.email }}</td>
-                        <td>{{ supplier.phone }}</td>
-                        <td>{{ supplier.country }}</td>
+                      <tr v-for="category in filterSearchTerm" :key="category.id">
+                        <td>{{ category.name }}</td>
                         <td>
                           <div >
-                            <router-link :to="{ name: 'edit-supplier', params:{ id: supplier.id } }" class="btn btn-sm btn-primary"><i class="fas fa-edit text-gray-100"></i></router-link>
-                            <a @click="deleteSupplier(supplier.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash text-gray-100"></i></a>
+                            <router-link :to="{ name: 'edit-category', params:{ id: category.id } }" class="btn btn-sm btn-primary"><i class="fas fa-edit text-gray-100"></i></router-link>
+                            <a @click="deleteCategory(category.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash text-gray-100"></i></a>
                           </div>
                         </td>
                         
@@ -89,25 +81,25 @@ export default {
   },
   data() {
     return {
-      suppliers: [],
+      categories: [],
       searchTerm: '',
     }
   },
 
   computed: {
     filterSearchTerm(){
-      return this.suppliers.filter(supplier => {
-        return supplier.name.match(this.searchTerm)
+      return this.categories.filter(category => {
+        return category.name.match(this.searchTerm)
       })
     }
   },
   methods: {
-    getSuppliers() {
-      axios.get('/api/v1/suppliers/')
-        .then(({data}) => (this.suppliers = data))
+    getCategories() {
+      axios.get('/api/v1/categories/')
+        .then(({data}) => (this.categories = data))
         .catch(error => this.errors = error.response.data.errors)
     },
-    deleteSupplier(id) {
+    deleteCategory(id) {
       Swal.fire({
         title: 'Are you sure?',
         text: "This action is irreversible!",
@@ -118,18 +110,18 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.isConfirmed) {
-          axios.delete('/api/v1/suppliers/'+id)
+          axios.delete('/api/v1/categories/'+id)
             .then(() => {
-              this.suppliers = this.suppliers.filter(supplier => {
-                return supplier.id != id
+              this.categories = this.categories.filter(category => {
+                return category.id != id
               })
             })
             .catch(() => {
-              this.$router.push({ name: 'suppliers'})
+              this.$router.push({ name: 'categories'})
             })
           Swal.fire(
             'Deleted!',
-            'Employee record has been deleted.',
+            'Category record has been deleted.',
             'success'
           )
         }
@@ -137,7 +129,7 @@ export default {
     }
   },
   created() {
-    this.getSuppliers();
+    this.getCategories();
   }
 }
 </script>
