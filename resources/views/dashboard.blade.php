@@ -95,6 +95,19 @@
                     </div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#expenses"
+                    aria-expanded="true" aria-controls="categorie">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Expenses</span>
+                    </a>
+                    <div id="expenses" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <router-link class="collapse-item" to="/add-expense">Add New Expense</router-link>
+                        <router-link class="collapse-item" to="/expenses">List All Expenses</router-link>
+                    </div>
+                    </div>
+                </li>
 
 
 
@@ -352,9 +365,22 @@
                 <router-view></router-view>
             </div>
             <!---Container Fluid-->
+            
         </div>
         
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+                <span>copyright &copy; <script> document.write(new Date().getFullYear()); </script> - developed by
+                <b><a href="https://github.com/Kistler1919" target="_blank">kistlr19</a></b>
+                </span>
+            </div>
+            </div>
+        </footer>
+        <!-- Footer -->
         </div>
+        
     </div>
   </div>
 

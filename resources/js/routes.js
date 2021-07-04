@@ -18,6 +18,9 @@ let EditCategory = require('./components/category/EditCategory.vue').default;
 let Products = require('./components/products/index.vue').default;
 let AddProduct = require('./components/products/AddProduct.vue').default;
 let EditProduct = require('./components/products/EditProduct.vue').default;
+let Expenses = require('./components/expenses/index.vue').default;
+let AddExpense = require('./components/expenses/AddExpense.vue').default;
+let EditExpense = require('./components/expenses/EditExpense.vue').default;
 
 export const routes = [
   { path: '/', component: HomeComponent, name: 'home'},
@@ -46,4 +49,9 @@ export const routes = [
   { path: '/products', component: Products, name: 'products'},
   { path: '/add-product', component: AddProduct, name: 'add-product'},
   { path: '/edit-product/:id', component: EditProduct, name: 'edit-product'},
+  
+  // Expenses CRUD routes
+  { path: '/expenses', component: Expenses, name: 'expenses'},
+  { path: '/add-expense', component: AddExpense, name: 'add-expense'},
+  { path: '/edit-expense/:id', component: EditExpense, name: 'edit-expense'},
 ]
