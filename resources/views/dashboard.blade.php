@@ -27,7 +27,7 @@
                     <div class="sidebar-brand-icon">
                     <img src="{{ asset('backend/img/logo/logo2.png')}}">
                     </div>
-                    <div class="sidebar-brand-text mx-3">Mourad</div>
+                    <div class="sidebar-brand-text mx-3">MouRad</div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
@@ -66,10 +66,6 @@
                     <div class="bg-white py-2 collapse-inner rounded">
                         <router-link class="collapse-item" to="/add-supplier">Add New Supplier</router-link>
                         <router-link class="collapse-item" to="/suppliers">List All Suppliers</router-link>
-                        {{-- <a class="collapse-item" href="dropdowns.html">Dropdowns</a>
-                        <a class="collapse-item" href="modals.html">Modals</a>
-                        <a class="collapse-item" href="popovers.html">Popovers</a>
-                        <a class="collapse-item" href="progress-bar.html">Progress Bars</a> --}}
                     </div>
                     </div>
                 </li>
@@ -86,6 +82,24 @@
                     </div>
                     </div>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#products"
+                    aria-expanded="true" aria-controls="categorie">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Products</span>
+                    </a>
+                    <div id="products" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <router-link class="collapse-item" to="/add-product">Add New Product</router-link>
+                        <router-link class="collapse-item" to="/products">List All Products</router-link>
+                    </div>
+                    </div>
+                </li>
+
+
+
+
+
                 <li class="nav-item">
                     <a class="nav-link" href="forms.html">
                     <i class="fab fa-fw fa-wpforms"></i>
