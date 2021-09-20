@@ -1,21 +1,20 @@
 <template>
   <div>
     <div class="row justify-content-center">
-      <router-link to="/add-expense" class="btn btn-primary">Add New Expense</router-link>
+      <router-link to="/alloc-salary" class="btn btn-primary">Pay Salary</router-link>
     </div>
         <div class="row justify-content-center">
-      <div class="col-xl-8 col-lg-8 col-md-4">
+      <div class="col-xl-12 col-lg-10 col-md-8">
         <div class="card shadow-lg my-5">
           <div class="card-body p-0">
             <div class="row">
               <div class="col-lg-12">
                 <div class="login-form">
                   <div class="text-center">
-                    <h1 class="h4 text-gray-700 mb-4">List all expenses</h1>
+                    <h1 class="h4 text-gray-700 mb-4">All Salary Details</h1>
                   </div>
                   <hr>
                   <div class="container-fluid" id="container-wrapper">
-
           <!-- Row -->
           <div class="row">
             <!-- Datatables -->
@@ -38,21 +37,16 @@
                   <table class="table align-items-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
-                        <th>Expense Details</th>
-                        <th>Amount</th>
-                        <th>Date</th>
-                        <th>Actions</th>
+                        <th>Month</th>
+                        <th>Details</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr v-for="expense in filterSearchTerm" :key="expense.id">
-                        <td>{{ expense.details }}</td>
-                        <td>$ {{ expense.amount }}</td>
-                        <td>{{ expense.date }}</td>
+                      <tr v-for="salary in filterSearchTerm" :key="salary.id">
+                        <td>{{ salary.salary_month }}</td>
                         <td>
                           <div >
-                            <router-link :to="{ name: 'edit-expense', params:{ id: expense.id } }" class="btn btn-sm btn-primary"><i class="fas fa-edit text-gray-100"></i></router-link>
-                            <a @click="deleteExpense(expense.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash text-gray-100"></i></a>
+                            <router-link :to="{ name: 'view-salary', params:{ id: salary.salary_month } }" class="btn btn-sm btn-primary">View Salaries</router-link>
                           </div>
                         </td>
                         
@@ -85,55 +79,27 @@ export default {
   },
   data() {
     return {
-      expenses: [],
+      salaries: [],
       searchTerm: '',
     }
   },
 
   computed: {
     filterSearchTerm(){
-      return this.expenses.filter(expense => {
-        return expense.details.match(this.searchTerm)
+      return this.salaries.filter(salary => {
+        return salary.salary_month.match(this.searchTerm)
       })
     }
   },
   methods: {
-    getExpenses() {
-      axios.get('/api/v1/expenses/')
-        .then(({data}) => (this.expenses = data))
+    getSalaries() {
+      axios.get('api/v1/salary/')
+        .then(({data}) => (this.salaries = data))
         .catch(error => this.errors = error.response.data.errors)
     },
-    deleteExpense(id) {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "This action is irreversible!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          axios.delete('/api/v1/expenses/'+id)
-            .then(() => {
-              this.expenses = this.expenses.filter(expense => {
-                return expense.id != id
-              })
-            })
-            .catch(() => {
-              this.$router.push({ name: 'expenses'})
-            })
-          Swal.fire(
-            'Deleted!',
-            'Category record has been deleted.',
-            'success'
-          )
-        }
-      })
-    }
   },
   created() {
-    this.getExpenses();
+    this.getSalaries();
   }
 }
 </script>

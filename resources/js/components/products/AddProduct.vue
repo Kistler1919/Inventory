@@ -112,7 +112,7 @@
                           <select v-model="form.category_id" class="form-control" id="exampleFormControlSelect1">
                             <option :value="category.id" v-for="category in categories" :key="category.id">{{ category.name }}</option>
                           </select>
-                      </div>
+                        </div>
                       <div class="col-md-4">
                         <label for="exampleFormControlSelect1">Supplier</label>
                         <select v-model="form.supplier_id" class="form-control" id="exampleFormControlSelect1">

@@ -31,7 +31,7 @@
                         class="form-control"
                         name="amount"
                         id="amount"
-                        placeholder="1200"
+                        placeholder="$1200"
                         v-model="form.amount"
                       />
                       <small class="text-danger" v-if="errors.amount">{{ errors.amount[0] }}</small>
