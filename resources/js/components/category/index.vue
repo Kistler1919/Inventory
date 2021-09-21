@@ -89,7 +89,7 @@ export default {
   computed: {
     filterSearchTerm(){
       return this.categories.filter(category => {
-        return category.name.match(this.searchTerm)
+        return category.name.toUpperCase().match(this.searchTerm.toUpperCase())
       })
     }
   },

@@ -22,6 +22,8 @@ let EditCategory = require('./components/category/EditCategory.vue').default;
 let Products = require('./components/products/index.vue').default;
 let AddProduct = require('./components/products/AddProduct.vue').default;
 let EditProduct = require('./components/products/EditProduct.vue').default;
+let Stocks = require('./components/products/stock.vue').default;
+let EditStock = require('./components/products/editStock.vue').default;
 
 let Expenses = require('./components/expenses/index.vue').default;
 let AddExpense = require('./components/expenses/AddExpense.vue').default;
@@ -32,6 +34,8 @@ let PaySalary = require('./components/salary/create.vue').default;
 let Salaries = require('./components/salary/index.vue').default;
 let ViewSalary = require('./components/salary/view.vue').default;
 let EditSalary = require('./components/salary/edit.vue').default;
+
+
 
 export const routes = [
   { path: '/', component: HomeComponent, name: 'home'},
@@ -72,4 +76,9 @@ export const routes = [
   { path: '/pay-salary/:id', component: PaySalary, name: 'pay-salary'},
   { path: '/view-salary/:id', component: ViewSalary, name: 'view-salary'},
   { path: '/edit-salary/:id', component: EditSalary, name: 'edit-salary'},
+  
+  
+  // Stock routes
+  { path: '/stock', component: Stocks, name: 'stocks'},
+  { path: '/edit-stock/:id', component: EditStock, name: 'edit-stock'},
 ]

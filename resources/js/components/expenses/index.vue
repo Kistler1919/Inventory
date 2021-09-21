@@ -93,7 +93,7 @@ export default {
   computed: {
     filterSearchTerm(){
       return this.expenses.filter(expense => {
-        return expense.details.match(this.searchTerm)
+        return expense.details.toUpperCase().match(this.searchTerm.toUpperCase())
       })
     }
   },

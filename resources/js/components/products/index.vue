@@ -35,13 +35,13 @@
                         </form>
                 </div>
                 <div class="table-responsive p-3">
-                  <table class="table align-items-center table-flush table-hover" id="dataTableHover">
+                  <table class="table align-items-center justify-content-center table-flush table-hover" id="dataTableHover">
                     <thead class="thead-light">
                       <tr>
                         <th>Name</th>
                         <th>Photo</th>
-                        <th>Purchase</th>
-                        <th>Sale</th>
+                        <th>PP($)</th>
+                        <th>SP($)</th>
                         <th>Code</th>
                         <th>Category</th>
                         <th>Supplier</th>

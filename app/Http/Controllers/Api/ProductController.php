@@ -177,4 +177,12 @@ class ProductController extends Controller
             Product::where('id', $id)->delete();
         }
     }
+    
+    public function updateStock(Request $request, $id)
+    {
+        $data = array();
+        $data['quantity'] = $request->quantity;
+
+        DB::table('products')->where('id', $id)->update($data);
+    }
 }

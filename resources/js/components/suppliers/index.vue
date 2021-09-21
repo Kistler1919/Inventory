@@ -97,7 +97,7 @@ export default {
   computed: {
     filterSearchTerm(){
       return this.suppliers.filter(supplier => {
-        return supplier.name.match(this.searchTerm)
+        return supplier.name.toUpperCase().match(this.searchTerm.toUpperCase())
       })
     }
   },
