@@ -11,6 +11,10 @@ let AddEmployee = require('./components/employees/AddEmployee.vue').default;
 let Employees = require('./components/employees/index.vue').default;
 let EditEmployee = require('./components/employees/EditEmployee.vue').default;
 
+let AddCustomer = require('./components/customers/create.vue').default;
+let Customers = require('./components/customers/index.vue').default;
+let EditCustomer = require('./components/customers/edit.vue').default;
+
 let Suppliers = require('./components/suppliers/index.vue').default;
 let AddSupplier = require('./components/suppliers/AddSupplier.vue').default;
 let EditSupplier = require('./components/suppliers/EditSupplier.vue').default;
@@ -48,6 +52,11 @@ export const routes = [
   { path: '/employees', component: Employees, name: 'employees'},
   { path: '/add-employee', component: AddEmployee, name: 'add-employee'},
   { path: '/edit-employee/:id', component: EditEmployee, name: 'edit-employee'},
+  
+  // Customer CRUD routes
+  { path: '/customers', component: Customers, name: 'customers'},
+  { path: '/add-customer', component: AddCustomer, name: 'add-customer'},
+  { path: '/edit-customer/:id', component: EditCustomer, name: 'edit-customer'},
   
   // Supplier CRUD routes
   { path: '/suppliers', component: Suppliers, name: 'suppliers'},

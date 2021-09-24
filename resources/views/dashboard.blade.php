@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <link href="{{ asset('backend/img/logo/logo.png')}}" rel="icon">
   <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css')}}">
-  <title>{{ config('app.name', 'Inventory Manager') }}</title>
+  <title>{{ config('app.name', 'Magri Inventory Manager') }}</title>
   <link href="{{ asset('backend/vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{ asset('backend/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css">
   <link href="{{ asset('backend/css/ruang-admin.min.css')}}" rel="stylesheet">
@@ -27,13 +27,18 @@
                     <div class="sidebar-brand-icon">
                     <img src="{{ asset('backend/img/logo/logo2.png')}}">
                     </div>
-                    <div class="sidebar-brand-text mx-3">MouRad</div>
+                    <div class="sidebar-brand-text mx-3">Magro</div>
                 </a>
                 <hr class="sidebar-divider my-0">
                 <li class="nav-item active">
                     <router-link class="nav-link" to="/">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Management Board</span></router-link>
+                </li>
+                <li class="nav-item bg-info badge-pill">
+                    <router-link class="nav-link" to="/">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Sales Point</span></router-link>
                 </li>
                 <hr class="sidebar-divider">
                 <div class="sidebar-heading">
@@ -122,6 +127,20 @@
                     </div>
                     </div>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#customer"
+                    aria-expanded="true" aria-controls="categorie">
+                    <i class="far fa-fw fa-window-maximize"></i>
+                    <span>Customers</span>
+                    </a>
+                    <div id="customer" class="collapse" aria-labelledby="headingBootstrap" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <router-link class="collapse-item" to="/add-customer">Add Customer</router-link>
+                        <router-link class="collapse-item" to="/customers">List All Customers</router-link>
+                    </div>
+                    </div>
+                </li>
                 
 
 
@@ -132,6 +151,7 @@
                         <span>Stocks</span>
                     </router-link>
                 </li>
+                
 
                 {{-- <li class="nav-item">
                     <a class="nav-link" href="forms.html">
@@ -156,13 +176,13 @@
                     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTable" aria-expanded="true"
                     aria-controls="collapseTable">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Tables</span>
+                    <span>Reports</span>
                     </a>
                     <div id="collapseTable" class="collapse" aria-labelledby="headingTable" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Tables</h6>
-                        <a class="collapse-item" href="simple-tables.html">Simple Tables</a>
-                        <a class="collapse-item" href="datatables.html">DataTables</a>
+                        <a class="collapse-item" href="simple-tables.html">Report One</a>
+                        <a class="collapse-item" href="datatables.html">Report Two</a>
                     </div>
                     </div>
                 </li>
