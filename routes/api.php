@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\CustomerController;
 use App\Http\Controllers\Api\EmployeeController;
 use App\Http\Controllers\Api\SalaryController;
+use App\Http\Controllers\Api\SaleController;
 use App\Http\Controllers\Api\SupplierController;
 
 
@@ -45,3 +46,5 @@ Route::get('v1/salary/edit/{id}', [SalaryController::class, 'edit']);
 Route::post('v1/salary/update/{id}', [SalaryController::class, 'updatePay']);
 
 Route::post('v1/stock/update/{id}', [ProductController::class, 'updateStock']);
+
+Route::get('v1/product-filter/{id}', [SaleController::class, 'productFilter']);

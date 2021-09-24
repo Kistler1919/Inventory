@@ -36,7 +36,7 @@
                     <span>Management Board</span></router-link>
                 </li>
                 <li class="nav-item bg-info badge-pill">
-                    <router-link class="nav-link" to="/">
+                    <router-link class="nav-link" to="/salespoint">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Sales Point</span></router-link>
                 </li>
